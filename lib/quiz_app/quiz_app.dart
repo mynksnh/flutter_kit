@@ -7,6 +7,13 @@ class QuizApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var questionIndex = 0;
+
+    void answerQuestion() {
+      questionIndex = questionIndex + 1;
+      print(questionIndex);
+    }
+
     var questions = [
       'What\'s your favorite color?',
       'What\'s your favorite animarl?',
