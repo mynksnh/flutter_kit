@@ -43,7 +43,7 @@ class HomeWidget extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            UserTransactions()
+            UserTransactions(),
           ],
         ),
       ),
