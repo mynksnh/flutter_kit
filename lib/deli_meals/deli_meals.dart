@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './categories_screen.dart';
+import './category_meals_screen.dart';
 
 void main() => runApp(DeliMeals());
 
@@ -20,7 +21,11 @@ class DeliMeals extends StatelessWidget {
               fontWeight: FontWeight.bold,
             )),
       ),
-      home: CategoriesScreen(),
+      initialRoute: '/', // default is '/'
+      routes: {
+        '/': (ctx) => CategoriesScreen(),
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+      },
     );
   }
 }
