@@ -9,6 +9,22 @@ class PersonalExpensesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter App',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        colorScheme: const ColorScheme(
+          brightness: Brightness.light,
+          primary: Colors.purple,
+          onPrimary: Colors.white,
+          secondary: Colors.black,
+          onSecondary: Colors.pink,
+          background: Colors.white,
+          onBackground: Colors.black,
+          error: Colors.red,
+          onError: Colors.black,
+          surface: Colors.white,
+          onSurface: Colors.black,
+        ),
+      ),
       home: PersonalExpensesAppHome(),
     );
   }
@@ -85,7 +101,6 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
