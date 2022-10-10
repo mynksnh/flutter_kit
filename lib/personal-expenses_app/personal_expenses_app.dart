@@ -128,45 +128,56 @@ class _HomeWidgetState extends State<HomeWidget> {
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text('Show Chart'),
-                  Switch(
-                    value: _showChart,
-                    onChanged: (val) {
-                      setState(() {
-                        _showChart = val;
-                      });
-                    },
+        child: Card(
+          elevation: 5,
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+            ),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                if (isLandscape)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('Show Chart'),
+                      Switch(
+                        value: _showChart,
+                        onChanged: (val) {
+                          setState(() {
+                            _showChart = val;
+                          });
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            if (!isLandscape)
-              Container(
-                height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top) *
-                    0.3,
-                child: Chart(_recentTransactions),
-              ),
-            if (!isLandscape) txListWidget,
-            if (isLandscape)
-              _showChart
-                  ? Container(
-                      height: (MediaQuery.of(context).size.height -
-                              appBar.preferredSize.height -
-                              MediaQuery.of(context).padding.top) *
-                          0.7,
-                      child: Chart(_recentTransactions),
-                    )
-                  : txListWidget
-          ],
+                if (!isLandscape)
+                  Container(
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.3,
+                    child: Chart(_recentTransactions),
+                  ),
+                if (!isLandscape) txListWidget,
+                if (isLandscape)
+                  _showChart
+                      ? Container(
+                          height: (MediaQuery.of(context).size.height -
+                                  appBar.preferredSize.height -
+                                  MediaQuery.of(context).padding.top) *
+                              0.7,
+                          child: Chart(_recentTransactions),
+                        )
+                      : txListWidget
+              ],
+            ),
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
