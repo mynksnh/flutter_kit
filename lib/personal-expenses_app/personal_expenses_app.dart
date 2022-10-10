@@ -10,21 +10,31 @@ class PersonalExpensesApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter App',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        colorScheme: const ColorScheme(
-          brightness: Brightness.light,
-          primary: Colors.purple,
-          onPrimary: Colors.white,
-          secondary: Colors.black,
-          onSecondary: Colors.pink,
-          background: Colors.white,
-          onBackground: Colors.black,
-          error: Colors.red,
-          onError: Colors.black,
-          surface: Colors.white,
-          onSurface: Colors.black,
-        ),
-      ),
+          primarySwatch: Colors.purple,
+          colorScheme: const ColorScheme(
+            brightness: Brightness.light,
+            primary: Colors.purple,
+            onPrimary: Colors.white,
+            secondary: Colors.black,
+            onSecondary: Colors.pink,
+            background: Colors.white,
+            onBackground: Colors.black,
+            error: Colors.red,
+            onError: Colors.black,
+            surface: Colors.white,
+            onSurface: Colors.black,
+          ),
+          fontFamily: 'Quicksand',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                titleSmall: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+          appBarTheme: AppBarTheme(
+            titleTextStyle: ThemeData.light().textTheme.titleSmall,
+          )),
       home: PersonalExpensesAppHome(),
     );
   }
@@ -46,20 +56,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 69.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Weekly Groceries',
-      amount: 16.53,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
