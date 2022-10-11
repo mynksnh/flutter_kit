@@ -1,3 +1,4 @@
+import 'package:academind_flutter_apps/deli_meals/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 import './favorites_screen.dart';
@@ -33,6 +34,7 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title'] as String),
       ),
+      drawer: MainDrawer(),
       body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
