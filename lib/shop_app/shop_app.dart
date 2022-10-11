@@ -8,8 +8,8 @@ import './providers/products.dart';
 class ShopApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => Products(),
+    return ChangeNotifierProvider.value(
+      value: Products(),
       child: MaterialApp(
           title: 'MyShop',
           theme: ThemeData(
