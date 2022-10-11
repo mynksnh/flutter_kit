@@ -14,21 +14,20 @@ class ShopApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => Products(),
+        ChangeNotifierProvider.value(
+          value: Products(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => Cart(),
+        ChangeNotifierProvider.value(
+          value: Cart(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => Orders(),
+        ChangeNotifierProvider.value(
+          value: Orders(),
         ),
       ],
       child: MaterialApp(
           title: 'MyShop',
           theme: ThemeData(
             primarySwatch: Colors.purple,
-            accentColor: Colors.deepOrange,
             fontFamily: 'Lato',
           ),
           home: ProductsOverviewScreen(),
