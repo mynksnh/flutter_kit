@@ -1,3 +1,4 @@
+import 'package:academind_flutter_apps/deli_meals/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
 import './screens/categories_screen.dart';
@@ -24,7 +25,7 @@ class DeliMeals extends StatelessWidget {
       ),
       initialRoute: '/', // default is '/'
       routes: {
-        '/': (ctx) => CategoriesScreen(),
+        '/': (ctx) => TabsScreen(),
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
       },
