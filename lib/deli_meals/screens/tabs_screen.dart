@@ -1,6 +1,6 @@
-import 'package:academind_flutter_apps/deli_meals/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/main_drawer.dart';
 import './favorites_screen.dart';
 import './categories_screen.dart';
 
