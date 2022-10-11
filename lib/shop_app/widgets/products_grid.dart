@@ -1,4 +1,3 @@
-import 'package:academind_flutter_apps/shop_app/providers/product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,7 @@ class ProductsGrid extends StatelessWidget {
       itemCount: products.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
         // builder: (c) => products[i],
-        value: products[i] as Product,
+        value: products[i],
         child: ProductItem(
             // products[i].id,
             // products[i].title,
