@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 import './product.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Products with ChangeNotifier {
+  final url = Uri.parse(
+      'https://blogtest-6fa39-default-rtdb.firebaseio.com/products.json');
+
   List<Product> _items = [
     Product(
       id: 'p1',
@@ -64,17 +69,30 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void addProduct(Product product) {
-    final newProduct = Product(
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      imageUrl: product.imageUrl,
-      id: DateTime.now().toString(),
-    );
-    _items.add(newProduct);
-    // _items.insert(0, newProduct); // at the start of the list
-    notifyListeners();
+  Future<void> addProduct(Product product) {
+    return http
+        .post(
+      url,
+      body: json.encode({
+        'title': product.title,
+        'description': product.description,
+        'imageUrl': product.imageUrl,
+        'price': product.price,
+        'isFavorite': product.isFavorite,
+      }),
+    )
+        .then((response) {
+      final newProduct = Product(
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+        id: json.decode(response.body)['name'],
+      );
+      _items.add(newProduct);
+      // _items.insert(0, newProduct); // at the start of the list
+      notifyListeners();
+    });
   }
 
   void updateProduct(String id, Product newProduct) {
@@ -90,5 +108,9 @@ class Products with ChangeNotifier {
   void deleteProduct(String id) {
     _items.removeWhere((prod) => prod.id == id);
     notifyListeners();
+  }
+
+  void test(dynamic value) {
+    print(value);
   }
 }
