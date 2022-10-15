@@ -20,21 +20,28 @@ class OrderItem {
 }
 
 class Orders with ChangeNotifier {
-  final url = Uri.parse(
-      'https://blogtest-6fa39-default-rtdb.firebaseio.com/orders.json');
+  Uri _getOrdersUri(String authToken) {
+    return Uri.parse(
+        'https://blogtest-6fa39-default-rtdb.firebaseio.com/orders.json?auth=$authToken');
+  }
 
-  Uri _getUpdateUri(String id) {
-    return Uri.parse('https://flutter-update.firebaseio.com/orders/$id.json');
+  Uri _getOrdersForUser(String userId, String authToken) {
+    return Uri.parse(
+        'https://blogtest-6fa39-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken');
   }
 
   List<OrderItem> _orders = [];
+  final String authToken;
+  final String userId;
+
+  Orders(this.authToken, this.userId, this._orders);
 
   List<OrderItem> get orders {
     return [..._orders];
   }
 
   Future<void> fetchAndSetOrders() async {
-    final response = await http.get(url);
+    final response = await http.get(_getOrdersForUser(userId, authToken));
     final List<OrderItem> loadedOrders = [];
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     if (extractedData == null) {
@@ -66,7 +73,7 @@ class Orders with ChangeNotifier {
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
     final timestamp = DateTime.now();
     final response = await http.post(
-      url,
+      _getOrdersForUser(userId, authToken),
       body: json.encode({
         'amount': total,
         'dateTime': timestamp.toIso8601String(),

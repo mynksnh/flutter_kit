@@ -6,11 +6,24 @@ import 'dart:convert';
 import '../models/http_exception.dart';
 
 class Products with ChangeNotifier {
-  final url = Uri.parse(
-      'https://blogtest-6fa39-default-rtdb.firebaseio.com/products.json');
+  Uri _getProductsUri(String authToken) {
+    return Uri.parse(
+        'https://blogtest-6fa39-default-rtdb.firebaseio.com/products.json?auth=$authToken');
+  }
 
-  Uri _getUpdateUri(String id) {
-    return Uri.parse('https://flutter-update.firebaseio.com/products/$id.json');
+  Uri _getProductsUriWithFilters(String authToken, String filterString) {
+    return Uri.parse(
+        'https://blogtest-6fa39-default-rtdb.firebaseio.com/products.json?auth=$authToken&$filterString');
+  }
+
+  Uri _getUpdateUri(String id, String authToken) {
+    return Uri.parse(
+        'https://flutter-update.firebaseio.com/products/$id.json?auth=$authToken');
+  }
+
+  Uri _getFavoritesUri(String authToken, String userId) {
+    return Uri.parse(
+        'https://blogtest-6fa39-default-rtdb.firebaseio.com/userFavorites/$userId.json?auth=$authToken');
   }
 
   List<Product> _items = [
@@ -49,6 +62,11 @@ class Products with ChangeNotifier {
   ];
   // var _showFavoritesOnly = false;
 
+  final String authToken;
+  final String userId;
+
+  Products(this.authToken, this.userId, this._items);
+
   List<Product> get items {
     // if (_showFavoritesOnly) {
     //   return _items.where((prodItem) => prodItem.isFavorite).toList();
@@ -56,10 +74,19 @@ class Products with ChangeNotifier {
     return [..._items];
   }
 
-  Future<void> fetchAndSetProducts() async {
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     try {
-      final response = await http.get(url);
+      final response =
+          await http.get(_getProductsUriWithFilters(authToken, filterString));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null) {
+        return;
+      }
+      final favoriteResponse =
+          await http.get(_getFavoritesUri(authToken, userId));
+      final favoriteData = json.decode(favoriteResponse.body);
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
@@ -67,14 +94,15 @@ class Products with ChangeNotifier {
           title: prodData['title'],
           description: prodData['description'],
           price: prodData['price'],
-          isFavorite: prodData['isFavorite'],
+          isFavorite:
+              favoriteData == null ? false : favoriteData[prodId] ?? false,
           imageUrl: prodData['imageUrl'],
         ));
       });
       _items = loadedProducts;
       notifyListeners();
     } catch (error) {
-      throw (error);
+      rethrow;
     }
   }
 
@@ -99,13 +127,13 @@ class Products with ChangeNotifier {
   Future<void> addProduct(Product product) async {
     try {
       final response = await http.post(
-        url,
+        _getProductsUri(authToken),
         body: json.encode({
           'title': product.title,
           'description': product.description,
           'imageUrl': product.imageUrl,
           'price': product.price,
-          'isFavorite': product.isFavorite,
+          'creatorId': userId,
         }),
       );
       final newProduct = Product(
@@ -119,15 +147,14 @@ class Products with ChangeNotifier {
       // _items.insert(0, newProduct); // at the start of the list
       notifyListeners();
     } catch (error) {
-      print(error);
-      throw error;
+      rethrow;
     }
   }
 
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
-      final url = _getUpdateUri(id);
+      final url = _getUpdateUri(id, authToken);
       await http.patch(url,
           body: json.encode({
             'title': newProduct.title,
@@ -143,7 +170,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url = _getUpdateUri(id);
+    final url = _getUpdateUri(id, authToken);
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     var existingProduct = _items[existingProductIndex];
     _items.removeAt(existingProductIndex);

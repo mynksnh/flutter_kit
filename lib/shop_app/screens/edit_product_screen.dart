@@ -51,7 +51,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           'description': _editedProduct.description,
           'price': _editedProduct.price.toString(),
           // 'imageUrl': _editedProduct.imageUrl,
-          'imageUrl': '',
+          'imageUrl': _editedProduct.imageUrl,
         };
         _imageUrlController.text = _editedProduct.imageUrl;
       }
@@ -92,7 +92,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     setState(() {
       _isLoading = true;
     });
-    if (_editedProduct.id != null) {
+    if (_editedProduct.id != "") {
       await Provider.of<Products>(context, listen: false)
           .updateProduct(_editedProduct.id, _editedProduct);
     } else {

@@ -3,11 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Product with ChangeNotifier {
-  final url = Uri.parse(
-      'https://blogtest-6fa39-default-rtdb.firebaseio.com/products.json');
-
-  Uri _getUpdateUri(String id) {
-    return Uri.parse('https://flutter-update.firebaseio.com/products/$id.json');
+  Uri _getUpdateUri(String id, String authToken, String userId) {
+    return Uri.parse(
+        'https://blogtest-6fa39-default-rtdb.firebaseio.com/userFavorites/$userId/$id.json?auth=$authToken');
   }
 
   String id;
@@ -39,16 +37,16 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleFavoriteStatus() async {
+  Future<void> toggleFavoriteStatus(String authToken, String userId) async {
     final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
     try {
-      final response = await http.patch(
-        url,
-        body: json.encode({
-          'isFavorite': isFavorite,
-        }),
+      final response = await http.put(
+        _getUpdateUri(id, authToken, userId),
+        body: json.encode(
+          isFavorite,
+        ),
       );
       if (response.statusCode >= 400) {
         _setFavValue(oldStatus);
