@@ -22,6 +22,9 @@ class _ImageInputState extends State<ImageInput> {
       source: ImageSource.camera,
       maxWidth: 600,
     );
+    if (imageXFile == null) {
+      return;
+    }
     setState(() {
       _storedImage = File(imageXFile?.path ?? "");
     });
