@@ -8,4 +8,18 @@ class GreatPlaces with ChangeNotifier {
   List<Place> get items {
     return [..._items];
   }
+
+  void addPlace(
+    String pickedTitle,
+    var pickedImage,
+  ) {
+    final newPlace = Place(
+      id: DateTime.now().toString(),
+      image: pickedImage,
+      title: pickedTitle,
+      location: PlaceLocation(latitude: 0, longitude: 0, address: ""),
+    );
+    _items.add(newPlace);
+    notifyListeners();
+  }
 }
