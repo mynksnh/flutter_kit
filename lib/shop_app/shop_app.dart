@@ -13,6 +13,7 @@ import './screens/orders_screen.dart';
 import './screens/user_products_screen.dart';
 import './screens/edit_product_screen.dart';
 import './screens/auth_screen.dart';
+import './helpers/custom_route.dart';
 
 class ShopApp extends StatelessWidget {
   @override
@@ -50,6 +51,12 @@ class ShopApp extends StatelessWidget {
             accentColor: Colors.deepOrange,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             fontFamily: 'Lato',
+            pageTransitionsTheme: PageTransitionsTheme(
+              builders: {
+                TargetPlatform.android: CustomPageTransitionBuilder(),
+                TargetPlatform.iOS: CustomPageTransitionBuilder(),
+              },
+            ),
           ),
           home: auth.isAuth
               ? ProductsOverviewScreen()
