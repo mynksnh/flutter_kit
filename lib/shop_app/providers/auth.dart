@@ -40,7 +40,8 @@ class Auth with ChangeNotifier {
       String email, String password, String urlSegment) async {
     try {
       final response = await http.post(
-        _getGoogleRestApiAuthUrl(urlSegment, "<api_key>"),
+        _getGoogleRestApiAuthUrl(
+            urlSegment, "AIzaSyCrkWxIG4ULG8cVorUTqNu1DKS8Kn1WrUU"),
         body: {
           'email': email,
           'password': password,
