@@ -69,6 +69,10 @@ flutter:
   assets:
    - assets/images/waiting.png
    - assets/images/product-placeholder.png
+   - assets/images/beach.jpg
+   - assets/images/dog.jpg
+   - assets/images/textiles.jpg
+   - assets/images/woman_shopping.jpg
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
@@ -131,5 +135,8 @@ flutter:
     - family: Anton
       fonts:
         - asset: assets/fonts/Anton-Regular.ttf
+    - family: LeckerliOne
+      fonts:
+        - asset: assets/fonts/LeckerliOne-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
