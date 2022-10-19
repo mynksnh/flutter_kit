@@ -13,11 +13,13 @@ import './flutterCookbook/Ch04WidgetsTree/e_commerce_screen_before.dart';
 import './flutterCookbook/Ch04WidgetsTree/e_commerce_screen_after.dart';
 import './flutterCookbook/Ch04WidgetsTree/flex_screen.dart';
 import './flutterCookbook/Ch04WidgetsTree/profile_screen.dart';
+import './flutterCookbook/Ch05NavLoginAlerts/stop_watch_app.dart';
+import './flutterCookbook/Ch06StateManagement/master_plan_app.dart';
 
 void main() {
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
   //   DeviceOrientation.portraitUp,
   // ]);
-  runApp(ProfileScreen());
+  runApp(MasterPlanApp());
 }
