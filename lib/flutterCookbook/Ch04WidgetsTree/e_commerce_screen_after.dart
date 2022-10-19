@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
-class ECommerceScreen extends StatelessWidget {
+class ECommerceScreenAfter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: <Widget>[
-            _buildToggleBar(context),
-            Image.asset('assets/woman_shopping.jpg'),
-            DealButtons(),
-            _buildProductTile(context),
-          ],
+    return MaterialApp(
+      home: Scaffold(
+        appBar: _buildAppBar(),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              _buildToggleBar(context),
+              Image.asset('assets/images/woman_shopping.jpg'),
+              DealButtons(),
+              _buildProductTile(context),
+            ],
+          ),
         ),
       ),
     );
@@ -26,7 +28,7 @@ class ECommerceScreen extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Image.asset(
-            'assets/textiles.jpg',
+            'assets/images/textiles.jpg',
             fit: BoxFit.fitHeight,
           ),
           Expanded(
@@ -65,7 +67,7 @@ class ECommerceScreen extends StatelessWidget {
   Widget _buildToggleItem(BuildContext context, String text,
       {bool selected = false}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(7.0),
       child: Text(
         text,
         style: TextStyle(

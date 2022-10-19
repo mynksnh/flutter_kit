@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 class FlexScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flexible and Expanded'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ..._header(context, 'Expanded'),
-          _buildExpanded(context),
-          ..._header(context, 'Flexible'),
-          _buildFlexible(context),
-          Expanded(
-            child: Container(),
-          ),
-          _buildFooter(context)
-        ],
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Flexible and Expanded'),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            ..._header(context, 'Expanded'),
+            _buildExpanded(context),
+            ..._header(context, 'Flexible'),
+            _buildFlexible(context),
+            Expanded(
+              child: Container(),
+            ),
+            _buildFooter(context)
+          ],
+        ),
       ),
     );
   }

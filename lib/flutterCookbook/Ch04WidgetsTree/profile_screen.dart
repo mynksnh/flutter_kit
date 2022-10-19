@@ -4,21 +4,23 @@ import './star.dart';
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Image.asset('assets/images/beach.jpg'),
-          Transform.translate(
-            offset: Offset(0, 100),
-            child: Column(
-              children: <Widget>[
-                _buildProfileImage(context),
-                _buildProfileDetails(context),
-                _buildActions(context),
-              ],
+    return MaterialApp(
+      home: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Image.asset('assets/images/beach.jpg'),
+            Transform.translate(
+              offset: Offset(0, 100),
+              child: Column(
+                children: <Widget>[
+                  _buildProfileImage(context),
+                  _buildProfileDetails(context),
+                  _buildActions(context),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -29,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
       height: 200,
       child: ClipOval(
         child: Image.asset(
-          'assets/dog.jpg',
+          'assets/images/dog.jpg',
           fit: BoxFit.fitWidth,
         ),
       ),
