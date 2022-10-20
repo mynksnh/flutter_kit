@@ -17,11 +17,13 @@ import './flutterCookbook/Ch05NavLoginAlerts/stop_watch_app.dart';
 import './flutterCookbook/Ch06StateManagement/master_plan_app.dart';
 import './flutterCookbook/Ch07Async/location_app.dart';
 import './flutterCookbook/Ch08PersistenceAndHttp/pizza_app.dart';
+import './flutterCookbook/Ch09aStreams/StreamAppA.dart';
+import './flutterCookbook/Ch09bStreams/stream_app_b.dart';
 
 void main() {
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
   //   DeviceOrientation.portraitUp,
   // ]);
-  runApp(PizzaApp());
+  runApp(StreamB());
 }
