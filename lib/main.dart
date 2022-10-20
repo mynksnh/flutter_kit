@@ -19,11 +19,12 @@ import './flutterCookbook/Ch07Async/location_app.dart';
 import './flutterCookbook/Ch08PersistenceAndHttp/pizza_app.dart';
 import './flutterCookbook/Ch09aStreams/StreamAppA.dart';
 import './flutterCookbook/Ch09bStreams/stream_app_b.dart';
+import './flutterCookbook/Ch11Animations/anim_app.dart';
 
 void main() {
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
   //   DeviceOrientation.portraitUp,
   // ]);
-  runApp(StreamB());
+  runApp(AnimApp());
 }
