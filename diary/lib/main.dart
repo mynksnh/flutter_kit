@@ -28,7 +28,6 @@ void main() async {
       await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
       await FirebaseStorage.instance.useStorageEmulator('localhost', 9091);
     } catch (e) {
-      // ignore: avoid_print
       print(e);
     }
   }
